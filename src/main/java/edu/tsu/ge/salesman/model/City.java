@@ -1,18 +1,29 @@
 package edu.tsu.ge.salesman.model;
 
 public class City {
-    int x;
-    int y;
+    private String name;
+    private int x;
+    private int y;
 
-    // Constructs a randomly placed city
     public City() {
-        this.x = (int) (Math.random() * 200);
-        this.y = (int) (Math.random() * 200);
     }
 
     // Constructs a city at chosen x, y location
-    public City(int x, int y) {
+    public City(int x, int y, String name) {
         this.x = x;
+        this.y = y;
+        this.name = name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
         this.y = y;
     }
 
@@ -26,6 +37,10 @@ public class City {
         return this.y;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     // Gets the distance to given city
     public double distanceTo(City city) {
         int xDistance = Math.abs(getX() - city.getX());
@@ -37,6 +52,6 @@ public class City {
 
     @Override
     public String toString() {
-        return getX() + ", " + getY();
+        return getName() + ": " + getX() + ", " + getY();
     }
 }
