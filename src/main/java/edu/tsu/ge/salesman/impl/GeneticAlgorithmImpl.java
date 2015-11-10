@@ -4,11 +4,11 @@ import edu.tsu.ge.salesman.model.City;
 import edu.tsu.ge.salesman.model.Population;
 import edu.tsu.ge.salesman.model.Tour;
 
-public class GeneticAlgorithmImpl implements GeneticAlgorithm {
-    /* GA parameters */
-    private static final double mutationRate = 0.015;
-    private static final int tournamentSize = 5;
-    private static final boolean elitism = true;
+public class GeneticAlgorithmImpl extends GeneticAlgorithm {
+
+    public GeneticAlgorithmImpl(double mutationRate, int tournamentSize, boolean elitism) {
+        super(mutationRate, tournamentSize, elitism);
+    }
 
     // Evolves a population over one generation
     public Population evolvePopulation(Population pop) {
@@ -16,7 +16,7 @@ public class GeneticAlgorithmImpl implements GeneticAlgorithm {
 
         // Keep our best individual if elitism is enabled
         int elitismOffset = 0;
-        if (elitism) {
+        if (ELITISM) {
             newPopulation.saveTour(0, pop.getFittest());
             elitismOffset = 1;
         }
@@ -86,7 +86,7 @@ public class GeneticAlgorithmImpl implements GeneticAlgorithm {
         // Loop through tour cities
         for (int tourPos1 = 0; tourPos1 < tour.tourSize(); tourPos1++) {
             // Apply mutation rate
-            if (Math.random() < mutationRate) {
+            if (Math.random() < MUTATION_RATE) {
                 // Get a second random position in the tour
                 int tourPos2 = (int) (tour.tourSize() * Math.random());
 
@@ -104,10 +104,10 @@ public class GeneticAlgorithmImpl implements GeneticAlgorithm {
     // Selects candidate tour for crossover
     public Tour tournamentSelection(Population pop) {
         // Create a tournament population
-        Population tournament = new Population(tournamentSize, false);
+        Population tournament = new Population(TOURNAMENT_SIZE, false);
         // For each place in the tournament get a random candidate tour and
         // add it
-        for (int i = 0; i < tournamentSize; i++) {
+        for (int i = 0; i < TOURNAMENT_SIZE; i++) {
             int randomId = (int) (Math.random() * pop.populationSize());
             tournament.saveTour(i, pop.getTour(randomId));
         }

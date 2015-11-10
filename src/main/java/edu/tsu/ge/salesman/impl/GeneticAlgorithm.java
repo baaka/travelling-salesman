@@ -3,13 +3,23 @@ package edu.tsu.ge.salesman.impl;
 import edu.tsu.ge.salesman.model.Population;
 import edu.tsu.ge.salesman.model.Tour;
 
-public interface GeneticAlgorithm {
-    Population evolvePopulation(Population pop);
+public abstract class GeneticAlgorithm {
+    protected final double MUTATION_RATE;
+    protected final int TOURNAMENT_SIZE;
+    protected final boolean ELITISM;
 
-    Tour crossover(Tour parent1, Tour parent2);
+    GeneticAlgorithm(double mutationRate, int tournamentSize, boolean elitism) {
+        MUTATION_RATE = mutationRate;
+        TOURNAMENT_SIZE = tournamentSize;
+        ELITISM = elitism;
+    }
 
-    void mutate(Tour tour);
+    public abstract Population evolvePopulation(Population pop);
 
-    Tour tournamentSelection(Population pop);
+    abstract Tour crossover(Tour parent1, Tour parent2);
+
+    abstract void mutate(Tour tour);
+
+    abstract Tour tournamentSelection(Population pop);
 
 }

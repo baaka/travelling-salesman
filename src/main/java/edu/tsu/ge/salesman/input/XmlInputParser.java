@@ -1,4 +1,7 @@
-package edu.tsu.ge.salesman.xml;
+package edu.tsu.ge.salesman.input;
+
+import edu.tsu.ge.salesman.input.xml.Cities;
+import edu.tsu.ge.salesman.input.xml.City;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -6,10 +9,15 @@ import javax.xml.bind.Unmarshaller;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CityXmlParser {
+public class XmlInputParser implements InputParser {
+
     private Cities cities;
 
-    public CityXmlParser() {
+    /**
+     * read .xml file, which contains information regarding cities.
+     * City (name, x , y)
+     */
+    public XmlInputParser() {
         try {
             JAXBContext context = JAXBContext.newInstance(Cities.class);
             Unmarshaller unmarshaller = context.createUnmarshaller();
@@ -19,7 +27,12 @@ public class CityXmlParser {
         }
     }
 
-    // transform and return cities from xml to cities from model
+    /**
+     * transform and return cities from xml to cities from model
+     *
+     * @return list of the cities from the input .xml file
+     */
+    @Override
     public List<edu.tsu.ge.salesman.model.City> getCities() {
         List<edu.tsu.ge.salesman.model.City> result = new ArrayList<>();
         if (cities != null) {

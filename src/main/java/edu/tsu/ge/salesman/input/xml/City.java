@@ -1,4 +1,4 @@
-package edu.tsu.ge.salesman.xml;
+package edu.tsu.ge.salesman.input.xml;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
