@@ -12,5 +12,26 @@
 hs_err_pid*
 
 target/*
-.idea/*
 *.iml
+
+
+*/.idea/*
+*/*/.idea/*
+*/*/*/.idea/*
+
+
+*/build/*
+*/*/build/*
+*/*/*/build/*
+
+*/.settings/*
+*/*/.settings/*
+*/*/*/.settings/*
+
+*/target/*
+*/*/target/*
+*/*/*/target/*
+
+*/dist/*
+*/*/dist/*
+*/*/*/dist/*

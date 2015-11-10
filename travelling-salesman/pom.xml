@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  
+  <groupId>edu.tsu.ge.salesman</groupId>
+  <artifactId>travelling-salesman</artifactId>
+  <packaging>pom</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>travelling-salesman</name>
+  
+  <url>http://maven.apache.org</url>
+  
+  <properties>
+	<version.junit>4.12</version.junit>
+  </properties>
+  
+  <modules>
+    <module>salesman-core</module>
+	<module>salesman-client</module>
+  </modules>
+  
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${version.junit}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  
+</project>
