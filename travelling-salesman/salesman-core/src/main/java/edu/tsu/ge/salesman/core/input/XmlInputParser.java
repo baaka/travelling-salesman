@@ -6,11 +6,13 @@ import edu.tsu.ge.salesman.core.input.xml.City;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 public class XmlInputParser implements InputParser {
 
+    private InputStream inputStream;
     private Cities cities;
 
     /**
@@ -21,10 +23,15 @@ public class XmlInputParser implements InputParser {
         try {
             JAXBContext context = JAXBContext.newInstance(Cities.class);
             Unmarshaller unmarshaller = context.createUnmarshaller();
-            cities = (Cities) unmarshaller.unmarshal(getClass().getClassLoader().getResourceAsStream(getClass().getPackage().getName().replace('.', '/') + "/cities.xml"));
+            cities = (Cities) unmarshaller.unmarshal(inputStream != null ? inputStream : getClass().getClassLoader().getResourceAsStream(getClass().getPackage().getName().replace('.', '/') + "/cities.xml"));
         } catch (JAXBException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void init(InputStream inputStream) {
+        this.inputStream = inputStream;
     }
 
     /**

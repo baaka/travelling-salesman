@@ -6,24 +6,21 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.junit.Assert;
-import org.junit.Test;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class ReadCitiesExcelTest {
+public class ExcelInputParser implements InputParser {
 
-    @Test
-    public void excelReader() throws IOException {
-        List<City> cities = new ArrayList<>();
+    private final List<City> cities;
+    private InputStream inputStream;
 
-        try (FileInputStream file = new FileInputStream(new File("./src/test/resources/cities.xlsx"))) {
-            Workbook workbook = new XSSFWorkbook(file);
+    public ExcelInputParser() {
+        cities = new ArrayList<>();
+        try (Workbook workbook = new XSSFWorkbook((inputStream != null) ? inputStream : getClass().getClassLoader().getResourceAsStream(getClass().getPackage().getName().replace('.', '/') + "/cities.xlsx"))) {
             Sheet sheet = workbook.getSheetAt(0);
 
             int rowIndex = 0;
@@ -57,9 +54,15 @@ public class ReadCitiesExcelTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
-        Assert.assertEquals(3, cities.size());
+    @Override
+    public void init(InputStream inputStream) {
+        this.inputStream = inputStream;
+    }
 
-        cities.forEach(System.out::println);
+    @Override
+    public List<City> getCities() {
+        return cities;
     }
 }

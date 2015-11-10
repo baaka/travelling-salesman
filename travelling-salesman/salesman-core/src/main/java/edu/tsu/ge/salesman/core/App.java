@@ -2,15 +2,18 @@ package edu.tsu.ge.salesman.core;
 
 import edu.tsu.ge.salesman.core.impl.GeneticAlgorithm;
 import edu.tsu.ge.salesman.core.impl.GeneticAlgorithmImpl;
+import edu.tsu.ge.salesman.core.input.ExcelInputParser;
 import edu.tsu.ge.salesman.core.input.InputParser;
+import edu.tsu.ge.salesman.core.input.InputType;
 import edu.tsu.ge.salesman.core.input.XmlInputParser;
 import edu.tsu.ge.salesman.core.manager.TourManager;
 import edu.tsu.ge.salesman.core.model.Population;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class App {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         boolean elitism = true;
 
         Scanner scanner = new Scanner(System.in);
@@ -24,7 +27,18 @@ public class App {
         System.out.println("*******************************");
 
 
-        InputParser inputParser = new XmlInputParser();
+        InputParser inputParser = null;
+        InputType inputType = InputType.EXCEL;
+
+        switch (inputType) {
+            case XML:
+                inputParser = new XmlInputParser();
+                break;
+            case EXCEL:
+                inputParser = new ExcelInputParser();
+                break;
+        }
+
         inputParser.getCities().forEach(TourManager::addCity);
 
         // Initialize population

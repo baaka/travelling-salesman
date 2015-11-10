@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<cities total='5'>
+    <city name='Tbilisi' x='10' y='12'/>
+    <city name='Kutaisi' x='5' y='120'/>
+    <city name='Rustavi' x='17' y='18'/>
+    <city name='Gori' x='29' y='35'/>
+    <city name='Batumi' x='32' y='72'/>
+</cities>
