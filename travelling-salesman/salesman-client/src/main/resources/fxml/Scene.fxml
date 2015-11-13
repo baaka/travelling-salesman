@@ -1,14 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns:fx="http://javafx.com/fxml" fx:controller="edu.tsu.ge.salesman.client.FXMLController">
+<AnchorPane id="AnchorPane" prefHeight="328.0" prefWidth="481.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.tsu.ge.salesman.client.FXMLController">
     <children>
-        <Button layoutX="126" layoutY="90" text="Click Me!" onAction="#handleButtonAction" fx:id="button" />
-        <Label layoutX="126" layoutY="120" minHeight="16" minWidth="69" fx:id="label" />
+      <BorderPane layoutX="14.0" layoutY="14.0" prefHeight="304.0" prefWidth="451.0">
+         <bottom>
+              <Button fx:id="calculateButton" onAction="#calculateButtonAction" text="Calculate" BorderPane.alignment="CENTER" />
+         </bottom>
+         <center>
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox prefHeight="38.0" prefWidth="297.0">
+                     <children>
+                        <Label fx:id="chooseFileLabel" alignment="CENTER_RIGHT" text="Choose Input File:">
+                           <HBox.margin>
+                              <Insets top="5.0" />
+                           </HBox.margin>
+                           <padding>
+                              <Insets right="5.0" />
+                           </padding>
+                        </Label>
+                        <TextField fx:id="inputFileTextField" prefHeight="25.0" prefWidth="290.0" promptText="Choose Input File" />
+                        <Button fx:id="chooseInputButton" mnemonicParsing="false" onAction="#chooseInputAction" text="Browse" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="31.0" prefWidth="451.0">
+                     <children>
+                        <Label fx:id="mutationRateLabel" alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="99.0" text="Mutation Rate:">
+                           <HBox.margin>
+                              <Insets top="5.0" />
+                           </HBox.margin>
+                           <padding>
+                              <Insets right="5.0" />
+                           </padding>
+                        </Label>
+                        <TextField fx:id="mutationRateTextField" prefHeight="25.0" prefWidth="341.0" promptText="Enter Mutation Rate" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="34.0" prefWidth="451.0">
+                     <children>
+                        <Label fx:id="tournamentSizeLabel" alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="99.0" text="Tournament Size:">
+                           <HBox.margin>
+                              <Insets top="5.0" />
+                           </HBox.margin>
+                           <padding>
+                              <Insets right="5.0" />
+                           </padding>
+                        </Label>
+                        <TextField fx:id="tournamentSizeTextField" prefHeight="25.0" prefWidth="342.0" promptText="Enter Tournament Size" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="31.0" prefWidth="451.0">
+                     <children>
+                        <Label fx:id="elitismLabel" alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="97.0" text="Elitism:">
+                           <HBox.margin>
+                              <Insets top="5.0" />
+                           </HBox.margin>
+                           <padding>
+                              <Insets right="5.0" />
+                           </padding>
+                        </Label>
+                        <CheckBox fx:id="elitismCheckBox" mnemonicParsing="false">
+                           <HBox.margin>
+                              <Insets top="5.0" />
+                           </HBox.margin>
+                        </CheckBox>
+                     </children>
+                  </HBox>
+                  <TextArea fx:id="resultTextArea" prefHeight="123.0" prefWidth="451.0" promptText="Result ...">
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin>
+                  </TextArea>
+               </children>
+            </VBox>
+         </center>
+      </BorderPane>
     </children>
 </AnchorPane>

@@ -16,11 +16,10 @@ import java.util.List;
 public class ExcelInputParser implements InputParser {
 
     private final List<City> cities;
-    private InputStream inputStream;
 
-    public ExcelInputParser() {
+    public ExcelInputParser(InputStream inputStream) throws Exception {
         cities = new ArrayList<>();
-        try (Workbook workbook = new XSSFWorkbook((inputStream != null) ? inputStream : getClass().getClassLoader().getResourceAsStream(getClass().getPackage().getName().replace('.', '/') + "/cities.xlsx"))) {
+        try (Workbook workbook = new XSSFWorkbook(inputStream)) {
             Sheet sheet = workbook.getSheetAt(0);
 
             int rowIndex = 0;
@@ -51,14 +50,9 @@ public class ExcelInputParser implements InputParser {
                     cities.add(city);
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Throwable t) {
+            throw new RuntimeException(t.getMessage(), t);
         }
-    }
-
-    @Override
-    public void init(InputStream inputStream) {
-        this.inputStream = inputStream;
     }
 
     @Override

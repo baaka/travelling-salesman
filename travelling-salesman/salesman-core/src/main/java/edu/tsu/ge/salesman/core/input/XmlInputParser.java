@@ -4,7 +4,6 @@ import edu.tsu.ge.salesman.core.input.xml.Cities;
 import edu.tsu.ge.salesman.core.input.xml.City;
 
 import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -12,26 +11,20 @@ import java.util.List;
 
 public class XmlInputParser implements InputParser {
 
-    private InputStream inputStream;
     private Cities cities;
 
     /**
      * read .xml file, which contains information regarding cities.
      * City (name, x , y)
      */
-    public XmlInputParser() {
+    public XmlInputParser(InputStream inputStream) throws Exception {
         try {
             JAXBContext context = JAXBContext.newInstance(Cities.class);
             Unmarshaller unmarshaller = context.createUnmarshaller();
-            cities = (Cities) unmarshaller.unmarshal(inputStream != null ? inputStream : getClass().getClassLoader().getResourceAsStream(getClass().getPackage().getName().replace('.', '/') + "/cities.xml"));
-        } catch (JAXBException e) {
-            e.printStackTrace();
+            cities = (Cities) unmarshaller.unmarshal(inputStream);
+        } catch (Throwable t) {
+            throw new RuntimeException(t.getMessage(), t);
         }
-    }
-
-    @Override
-    public void init(InputStream inputStream) {
-        this.inputStream = inputStream;
     }
 
     /**
